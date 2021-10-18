@@ -5,9 +5,9 @@
 // @grant        GM_addStyle
 // ==/UserScript==
 
-let openMapOnWrongAnswer = true;
+let openMapOnWrongAnswer = false;
 
-let mapTilesURL = ""; // Example "https://tile.website.org/{z}/{x}/{y}.png;
+let mapTilesURL = ""; // Example "https://tile.website.org/{z}/{x}/{y}.png".
 
 //---------------------------------------------------------------------------------
 
