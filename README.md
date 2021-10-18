@@ -19,7 +19,7 @@ Useful widget for playing country streaks on any geoguessr map.
   - Open geoguessr in a brand new tab, refreshing an old tab might work but it might not.
   - Optional: Find map tiles on the internet to enable the map feature.
     - Insert the URL of a tile server into the `let mapTilesURL = "";` variable at the top of the code.
-      For example, `let maptiles = "https://tile.openstreetmap.org/${z}/${x}/${y}.png";` will show
+      For example, `let mapTilesURL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";` will show
       OpenStreeMap tiles which are free to use for personal use. Here is a list of tile servers from
       the OpenStreetMap website, but there are others available (most tile servers require registration).
       https://wiki.openstreetmap.org/wiki/Tile_servers 
