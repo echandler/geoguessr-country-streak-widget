@@ -6,7 +6,7 @@ Useful widget for playing country streaks on any geoguessr map.
 #### How to use:
   - Click on the widget to view "Max" and "Last" info..
   - Hold the mouse button and drag the widget to a new location.
-  - Click on word "Streak", "Max" or "Last" to view rounds on a zoomable map.
+  - Click on word "Streak", "Max" or "Last" to view streaks on a zoomable map.
   - Press the number 0 to zero out the counter. (Currently there isn't
     a way to increase or decrease the streak manually)
   - If the map popping up automatically is annoying, change `let openMapOnWrongAnswer = true;`
@@ -24,4 +24,4 @@ Useful widget for playing country streaks on any geoguessr map.
       the OpenStreetMap website, but there are others available (most tile servers require registration).
       https://wiki.openstreetmap.org/wiki/Tile_servers 
    - If you have added a tile map server URL, change `let openMapOnWrongAnswer = false;` at the top 
-     of the code to: `let openMapOnWrongAnswer = true;`  so that the map will show up automatically.
+     of the code to `let openMapOnWrongAnswer = true;`  so that the map will show up automatically.
