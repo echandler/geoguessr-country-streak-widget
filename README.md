@@ -23,5 +23,5 @@ Useful widget for playing country streaks on any geoguessr map.
       OpenStreeMap tiles which are free to use for personal use. Here is a list of tile servers from
       the OpenStreetMap website, but there are others available (most tile servers require registration).
       https://wiki.openstreetmap.org/wiki/Tile_servers 
-   - If you have added a tile map server URL, change `let openMapOnWrongAnswer = false;` at the top 
+   - If you have added a map tile server URL, change `let openMapOnWrongAnswer = false;` at the top 
      of the code to `let openMapOnWrongAnswer = true;`  so that the map will show up automatically.
