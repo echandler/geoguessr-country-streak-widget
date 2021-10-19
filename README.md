@@ -7,8 +7,7 @@ Useful widget for playing country streaks on any geoguessr map.
   - Click on the widget to view "Max" and "Last" info..
   - Hold the mouse button and drag the widget to a new location.
   - Click on word "Streak", "Max" or "Last" to view streaks on a zoomable map.
-  - Press the number 0 to zero out the counter. (Currently there isn't
-    a way to increase or decrease the streak manually)
+  - Press the number 0 to zero out the counter, the number 1 increases the count, the number 2 decreases the count.
   - If the map popping up automatically is annoying, change `let openMapOnWrongAnswer = true;`
     at the top of the code to: `let openMapOnWrongAnswer = false;`.
   - The widget doesn't work on challenges.
