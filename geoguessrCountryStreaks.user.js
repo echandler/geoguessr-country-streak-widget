@@ -1,11 +1,11 @@
 // ==UserScript==
-// @name         Country Streak Counter (Automated) version 5.3
+// @name         Country Streak Counter (Automated) version 5.5
 // @include      /^(https?)?(\:)?(\/\/)?([^\/]*\.)?geoguessr\.com($|\/.*)/
 // @description  Adds a country streak counter to the GeoGuessr website
 // @grant        GM_addStyle
 // ==/UserScript==
 
-let openMapOnWrongAnswer = false;
+let openMapOnWrongAnswer = false; 
 
 let mapTilesURL = ""; // Example "https://tile.website.org/{z}/{x}/{y}.png".
 
@@ -43,7 +43,7 @@ function getMaxStreak() {
         let len = sd.s[n].length;
 
         if (len > 0 && sd.s[n][len - 1].guess.country == sd.s[n][len - 1].location.country) {
-            // Game hasn't ended yet.
+            // Game hasn't ended yet of player zeroed out the streak and started a new one.
             if (len > ret.max) {
                 ret.max = len;
                 ret.streakNum = n;
@@ -84,7 +84,7 @@ function getPrevStreak() {
     return ret;
 }
 
-function updateStreak(newVariable) {
+function updateStreak() {
     let cur = getCurStreak();
     document.getElementById("streak_cur_num").innerText = cur.num;
 
@@ -403,19 +403,19 @@ function createMap(lls) {
         .addTo(mymap);
 
     for (let i = 0; i < lls.length; i++) {
+        let content = "";
         if (lls[i].guess.country == lls[i].location.country) {
-            let content = `<div style='color:blue; text-align: center;font-family: 'neo-sans','sans-serif';font-weight:700;'>
-                                <a target='_blank' href='https://www.google.com/maps?q&layer=c&cbll=${lls[i].location.lat},${lls[i].location.lon}'> ${i + 1} - ${lls[i].location.country}</a>
-                            </div>`;
-            leaflet.popup({ closeOnClick: false, autoClose: false }).setLatLng([lls[i].location.lat, lls[i].location.lon]).setContent(content).addTo(mymap);
+            content = `<div style='color:blue; text-align: center;font-family: 'neo-sans','sans-serif';font-weight:700;'>
+                           <a target='_blank' href='https://www.google.com/maps?q&layer=c&cbll=${lls[i].location.lat},${lls[i].location.lon}'> ${i + 1} - ${lls[i].location.country}</a>
+                       </div>`;
         } else {
-            let content = `<div style='text-align: center;font-family: var(--countryStreakFont);font-weight:700;'>
-                                <a target='_blank' href='https://www.google.com/maps?q&layer=c&cbll=${lls[i].location.lat},${lls[i].location.lon}'> ${i + 1} - ${lls[i].location.country}</a>
-                            <br>
-                                You guessed: ${lls[i].guess.country}
-                            </div>`;
-            leaflet.popup({ closeOnClick: false, autoClose: false }).setLatLng([lls[i].location.lat, lls[i].location.lon]).setContent(content).addTo(mymap);
+            content = `<div style='text-align: center;font-family: var(--countryStreakFont);font-weight:700;'>
+                           <a target='_blank' href='https://www.google.com/maps?q&layer=c&cbll=${lls[i].location.lat},${lls[i].location.lon}'> ${i + 1} - ${lls[i].location.country}</a>
+                           <br>
+                           You guessed: ${lls[i].guess.country}
+                       </div>`;
         }
+        leaflet.popup({ closeOnClick: false, autoClose: false, autoPan: false }).setLatLng([lls[i].location.lat, lls[i].location.lon]).setContent(content).addTo(mymap);
     }
 
     return parentMap;
@@ -449,15 +449,21 @@ function addStreakListener() {
 
 document.addEventListener("keypress", (e) => {
     switch (e.key) {
-        //        case '1':
-        //            updateStreak(streak + 1);
-        //            sessionStorage.setItem("Streak", streak);
-        //            break;
-        //        case '2':
-        //            updateStreak(streak - 1);
-        //            sessionStorage.setItem("Streak", streak);
-        //            break;
+        case '1':
+            let msg = prompt("Would you like to record message?");
+            msg = msg? msg: "Increase by 1";
+            sd.s[sd.s.length - 1].push({ guess: { lat: -81.191884, lon: -18.546253, country: msg }, location: { lat: -81.191884, lon: -18.546253, country: msg } });
+            sessionStorage.setItem("streakData", JSON.stringify(sd));
+            updateStreak();
+            break;
+        case '2':
+            if (!confirm("Do you want to delete the last round?")) return;
+            let t = sd.s[sd.s.length - 1].pop();
+            sessionStorage.setItem("streakData", JSON.stringify(sd));
+            updateStreak();
+            break;
         case "0":
+            if (getCurStreak().num == 0) return;
             sd.s.push([]);
             sessionStorage.setItem("streakData", JSON.stringify(sd));
             updateStreak();
