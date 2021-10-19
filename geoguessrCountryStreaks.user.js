@@ -385,7 +385,7 @@ function createMap(lls) {
     setTimeout(() => {
         mymap.dragging.enable();
         mymap.scrollWheelZoom.enable();
-    }, 15);
+    }, 1500);
 
     if (mapTilesURL == "") {
         alert("Please specify a URL for the map tiles in the 'mapTilesURL' variable.");
