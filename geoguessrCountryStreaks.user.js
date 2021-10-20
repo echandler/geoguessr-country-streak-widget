@@ -380,7 +380,7 @@ function createMap(lls) {
     let mymap = leaflet.map("leafletMap").setView([15, 0], 2);
 
     mymap.dragging.disable();
-    mymap.scrollWheelZoom.disabl;
+    mymap.scrollWheelZoom.disable();
 
     setTimeout(() => {
         mymap.dragging.enable();
