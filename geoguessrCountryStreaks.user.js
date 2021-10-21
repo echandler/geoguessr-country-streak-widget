@@ -397,8 +397,6 @@ function createMap(lls) {
     mymap.dragging.disable();
     mymap.scrollWheelZoom.disable();
 
-    let nowtime = Date.now();
-
     setTimeout(() => {
         mymap.dragging.enable();
         mymap.scrollWheelZoom.enable();
