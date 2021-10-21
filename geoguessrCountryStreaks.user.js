@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Country Streak Counter (Automated) version 5.5
+// @name         Country Streak Counter (Automated) version 5.6
 // @include      /^(https?)?(\:)?(\/\/)?([^\/]*\.)?geoguessr\.com($|\/.*)/
 // @description  Adds a country streak counter to the GeoGuessr website
 // @grant        GM_addStyle
@@ -360,11 +360,25 @@ function createMap(lls) {
     closeBtn.id = "leafletMap_closeBtn";
     closeBtn.classList.add("blue_closeBtn");
     closeBtn.style.cssText = "width:40px; height: 100%; position: absolute; top: 0px; right: 0px; text-align: center; cursor: pointer;";
-    closeBtn.innerText = "x";
+    closeBtn.innerText = "X";
     closeBtn.addEventListener("click", function (e) {
         let map = document.getElementById("leaflet_parentMap");
         document.body.removeChild(map);
     });
+
+    let closeBtnBottom = document.createElement("div");
+    closeBtnBottom.id = "leafletMap_closeBtn";
+    closeBtnBottom.classList.add("blue_closeBtn");
+    closeBtnBottom.style.cssText = "width:100%; line-height:1.5em; position: absolute; bottom: 5px; text-align: center; cursor: pointer; color: white; z-index: 99999;";
+    closeBtnBottom.innerHTML = "<div style=\"width: 1.5em; margin: auto; box-shadow: 0px 0px 0px 1px; border-radius: 40px;\">X</div>";
+    closeBtnBottom.addEventListener("click", function (e) {
+        let map = document.getElementById("leaflet_parentMap");
+        document.body.removeChild(map);
+    });
+
+    parentMap.appendChild(closeBtnBottom);
+
+
 
     let map = document.createElement("div");
     map.id = "leafletMap";
@@ -379,8 +393,11 @@ function createMap(lls) {
     let leaflet = unsafeWindow.L;
     let mymap = leaflet.map("leafletMap").setView([15, 0], 2);
 
+
     mymap.dragging.disable();
     mymap.scrollWheelZoom.disable();
+
+    let nowtime = Date.now();
 
     setTimeout(() => {
         mymap.dragging.enable();
